@@ -1,0 +1,146 @@
+query GetProjectItems(
+  $after: String
+  $limit: Int!
+  $owner: String!
+  $projectNumber: Int!
+) {
+  user(login: $owner) {
+    projectV2(number: $projectNumber) {
+      items(
+        first: $limit
+        after: $after
+        orderBy: { field: POSITION, direction: DESC }
+      ) {
+        nodes {
+          id
+          type
+          content {
+            __typename
+            ... on Issue {
+              id
+              title
+              url
+              author {
+                login
+              }
+            }
+            ... on PullRequest {
+              id
+              title
+              url
+              author {
+                login
+              }
+            }
+            ... on DraftIssue {
+              title
+              creator {
+                login
+              }
+            }
+          }
+          fieldValues(first: 20, orderBy: { field: POSITION, direction: ASC }) {
+            nodes {
+              __typename
+              ... on ProjectV2ItemFieldUserValue {
+                users(first: 10) {
+                  nodes {
+                    login
+                  }
+                }
+                field {
+                  ... on ProjectV2Field {
+                    name
+                  }
+                }
+              }
+              ... on ProjectV2ItemFieldDateValue {
+                date
+                field {
+                  ... on ProjectV2Field {
+                    name
+                  }
+                }
+              }
+              ... on ProjectV2ItemFieldRepositoryValue {
+                repository {
+                  nameWithOwner
+                }
+                field {
+                  ... on ProjectV2Field {
+                    name
+                  }
+                }
+              }
+              ... on ProjectV2ItemFieldLabelValue {
+                labels(first: 10) {
+                  nodes {
+                    name
+                  }
+                }
+                field {
+                  ... on ProjectV2Field {
+                    name
+                  }
+                }
+              }
+              ... on ProjectV2ItemFieldIterationValue {
+                iterationId
+                startDate
+                duration
+                field {
+                  ... on ProjectV2IterationField {
+                    name
+                    configuration {
+                      startDay
+                    }
+                  }
+                }
+              }
+              ... on ProjectV2ItemFieldMilestoneValue {
+                milestone {
+                  title
+                }
+                field {
+                  ... on ProjectV2Field {
+                    name
+                  }
+                }
+              }
+              ... on ProjectV2ItemFieldNumberValue {
+                id
+                number
+                field {
+                  ... on ProjectV2Field {
+                    name
+                  }
+                }
+              }
+              ... on ProjectV2ItemFieldSingleSelectValue {
+                id
+                name
+                field {
+                  ... on ProjectV2SingleSelectField {
+                    name
+                  }
+                }
+              }
+              ... on ProjectV2ItemFieldTextValue {
+                text
+                field {
+                  ... on ProjectV2Field {
+                    name
+                  }
+                }
+              }
+            }
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+  }
+}
