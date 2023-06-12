@@ -9,7 +9,7 @@ require (
 	github.com/itchyny/gojq v0.12.13
 	github.com/notomo/httpwriter v0.0.0-20230402073442-90e3c7ef0233
 	github.com/stretchr/testify v1.7.0
-	github.com/urfave/cli/v2 v2.25.5
+	github.com/urfave/cli/v2 v2.25.6
 )
 
 require (
