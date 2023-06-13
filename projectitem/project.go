@@ -45,7 +45,7 @@ func GetProjectItems(
 	filter Filter,
 	limit int,
 ) ([]any, error) {
-	variables := map[string]interface{}{
+	variables := map[string]any{
 		"owner":         graphql.String(descriptor.Owner),
 		"projectNumber": graphql.Int(descriptor.Number),
 	}

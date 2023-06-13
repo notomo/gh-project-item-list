@@ -23,12 +23,12 @@ func Paginate(
 	gql api.GQLClient,
 	query string,
 	pageReceiver PageReceiver,
-	variables map[string]interface{},
+	variables map[string]any,
 	each func(context.Context, []any) (bool, error),
 ) error {
 	var cursor *graphql.String
 	for {
-		vars := map[string]interface{}{
+		vars := map[string]any{
 			"limit": graphql.Int(limitPerRequest),
 			"after": cursor,
 		}
@@ -59,7 +59,7 @@ func Collect(
 	gql api.GQLClient,
 	query string,
 	pageReceiver PageReceiver,
-	variables map[string]interface{},
+	variables map[string]any,
 	filter Filter,
 	limit int,
 ) ([]any, error) {
