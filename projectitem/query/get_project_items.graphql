@@ -14,12 +14,14 @@ query GetProjectItems(
         nodes {
           id
           type
+          isArchived
           content {
             __typename
             ... on Issue {
               id
               title
               url
+              state
               author {
                 login
               }
@@ -28,6 +30,7 @@ query GetProjectItems(
               id
               title
               url
+              state
               author {
                 login
               }
