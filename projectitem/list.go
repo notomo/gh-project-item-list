@@ -14,6 +14,7 @@ func List(
 	projectUrl string,
 	jqFilter string,
 	limit int,
+	pageLimit int,
 	writer io.Writer,
 ) error {
 	projectDescriptor, err := GetProjectDescriptor(projectUrl)
@@ -26,7 +27,7 @@ func List(
 		return err
 	}
 
-	items, err := GetProjectItems(ctx, gql, *projectDescriptor, filter, limit)
+	items, err := GetProjectItems(ctx, gql, *projectDescriptor, filter, limit, pageLimit)
 	if err != nil {
 		return err
 	}

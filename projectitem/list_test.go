@@ -40,6 +40,7 @@ func TestList(t *testing.T) {
 		"https://github.com/users/notomo/projects/1",
 		".[]",
 		10,
+		0,
 		output,
 	))
 

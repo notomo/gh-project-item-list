@@ -44,6 +44,7 @@ func GetProjectItems(
 	descriptor ProjectDescriptor,
 	filter Filter,
 	limit int,
+	pageLimit int,
 ) ([]any, error) {
 	variables := map[string]any{
 		"owner":         graphql.String(descriptor.Owner),
@@ -68,5 +69,6 @@ func GetProjectItems(
 		variables,
 		filter,
 		limit,
+		pageLimit,
 	)
 }

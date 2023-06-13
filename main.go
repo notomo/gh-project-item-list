@@ -17,6 +17,7 @@ const (
 	paramProjectUrl = "project-url"
 	paramJq         = "jq"
 	paramLimit      = "limit"
+	paramPageLimit  = "page-limit"
 	paramLog        = "log"
 )
 
@@ -55,6 +56,7 @@ func main() {
 				c.String(paramProjectUrl),
 				c.String(paramJq),
 				c.Int(paramLimit),
+				c.Int(paramPageLimit),
 				os.Stdout,
 			)
 		},
@@ -76,6 +78,12 @@ func main() {
 				Value:    10,
 				Required: false,
 				Usage:    "limit",
+			},
+			&cli.IntFlag{
+				Name:     paramPageLimit,
+				Value:    0,
+				Required: false,
+				Usage:    "page limit",
 			},
 			&cli.StringFlag{
 				Name:     paramLog,

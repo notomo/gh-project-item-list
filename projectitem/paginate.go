@@ -62,7 +62,9 @@ func Collect(
 	variables map[string]any,
 	filter Filter,
 	limit int,
+	pageLimit int,
 ) ([]any, error) {
+	pageCountDown := pageLimit
 	collected := []any{}
 	if err := Paginate(
 		ctx,
@@ -82,7 +84,9 @@ func Collect(
 				return false, nil
 			}
 
-			return true, nil
+			pageCountDown--
+
+			return pageCountDown > 0, nil
 		},
 	); err != nil {
 		return nil, err
