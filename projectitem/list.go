@@ -3,6 +3,7 @@ package projectitem
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"io"
 
 	"github.com/cli/go-gh/pkg/api"
@@ -19,23 +20,23 @@ func List(
 ) error {
 	projectDescriptor, err := GetProjectDescriptor(projectUrl)
 	if err != nil {
-		return err
+		return fmt.Errorf("get project descriptor: %w", err)
 	}
 
 	filter, err := CreateFilter(jqFilter)
 	if err != nil {
-		return err
+		return fmt.Errorf("create filter: %w", err)
 	}
 
 	items, err := GetProjectItems(ctx, gql, *projectDescriptor, filter, limit, pageLimit)
 	if err != nil {
-		return err
+		return fmt.Errorf("get project items: %w", err)
 	}
 
 	encorder := json.NewEncoder(writer)
 	encorder.SetIndent("", "  ")
 	if err := encorder.Encode(items); err != nil {
-		return err
+		return fmt.Errorf("json encode: %w", err)
 	}
 
 	return nil
