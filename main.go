@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/cli/go-gh"
@@ -28,22 +30,24 @@ func main() {
 			opts := &api.ClientOptions{}
 			logDirPath := c.String(paramLog)
 			if logDirPath != "" {
-				logger := &httpretty.Logger{
-					Time:            true,
-					TLS:             false,
-					RequestHeader:   true,
-					RequestBody:     true,
-					ResponseHeader:  true,
-					ResponseBody:    true,
-					MaxResponseBody: 1000000,
-					Formatters:      []httpretty.Formatter{&httpretty.JSONFormatter{}},
-				}
 				opts.Transport = &httpwriter.Transport{
-					Transport: logger.RoundTripper(nil),
+					TransportFactory: func(writer io.Writer) http.RoundTripper {
+						logger := &httpretty.Logger{
+							Time:            true,
+							TLS:             false,
+							RequestHeader:   true,
+							RequestBody:     true,
+							ResponseHeader:  true,
+							ResponseBody:    true,
+							MaxResponseBody: 1000000,
+							Formatters:      []httpretty.Formatter{&httpretty.JSONFormatter{}},
+						}
+						logger.SetOutput(writer)
+						return logger.RoundTripper(nil)
+					},
 					GetWriter: httpwriter.MustDirectoryWriter(
 						&httpwriter.Directory{Path: logDirPath},
 					),
-					SetWriter: logger.SetOutput,
 				}
 			}
 			gql, err := gh.GQLClient(opts)
