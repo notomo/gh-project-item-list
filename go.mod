@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/cli/go-gh v1.2.1
 	github.com/cli/shurcooL-graphql v0.0.4
-	github.com/henvic/httpretty v0.1.2
+	github.com/henvic/httpretty v0.1.3
 	github.com/itchyny/gojq v0.12.13
 	github.com/notomo/httpwriter v0.0.0-20230801001457-d247ac2be072
 	github.com/stretchr/testify v1.8.4
