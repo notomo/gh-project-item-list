@@ -1,8 +1,6 @@
 module github.com/notomo/gh-project-item-list
 
-go 1.21
-
-toolchain go1.22.3
+go 1.23
 
 require (
 	github.com/cli/go-gh v1.2.1
