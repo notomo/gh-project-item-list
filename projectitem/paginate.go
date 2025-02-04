@@ -3,7 +3,7 @@ package projectitem
 import (
 	"context"
 
-	"github.com/cli/go-gh/pkg/api"
+	"github.com/cli/go-gh/v2/pkg/api"
 	graphql "github.com/cli/shurcooL-graphql"
 )
 
@@ -20,7 +20,7 @@ const limitPerRequest = 100
 
 func Paginate(
 	ctx context.Context,
-	gql api.GQLClient,
+	gql *api.GraphQLClient,
 	query string,
 	pageReceiver PageReceiver,
 	variables map[string]any,
@@ -56,7 +56,7 @@ func Paginate(
 
 func Collect(
 	ctx context.Context,
-	gql api.GQLClient,
+	gql *api.GraphQLClient,
 	query string,
 	pageReceiver PageReceiver,
 	variables map[string]any,

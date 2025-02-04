@@ -6,7 +6,7 @@ import (
 
 	_ "embed"
 
-	"github.com/cli/go-gh/pkg/api"
+	"github.com/cli/go-gh/v2/pkg/api"
 	graphql "github.com/cli/shurcooL-graphql"
 )
 
@@ -40,7 +40,7 @@ func (p *PageForOrganization) Page() ([]any, PageInfo) {
 
 func GetProjectItems(
 	ctx context.Context,
-	gql api.GQLClient,
+	gql *api.GraphQLClient,
 	descriptor ProjectDescriptor,
 	filter Filter,
 	limit int,

@@ -7,8 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/cli/go-gh"
-	"github.com/cli/go-gh/pkg/api"
+	"github.com/cli/go-gh/v2/pkg/api"
 	"github.com/henvic/httpretty"
 	"github.com/notomo/gh-project-item-list/projectitem"
 	"github.com/notomo/httpwriter"
@@ -27,7 +26,7 @@ func main() {
 	app := &cli.App{
 		Name: "gh-project-item-list",
 		Action: func(c *cli.Context) error {
-			opts := &api.ClientOptions{}
+			opts := api.ClientOptions{}
 			logDirPath := c.String(paramLog)
 			if logDirPath != "" {
 				opts.Transport = &httpwriter.Transport{
@@ -50,7 +49,7 @@ func main() {
 					),
 				}
 			}
-			gql, err := gh.GQLClient(opts)
+			gql, err := api.NewGraphQLClient(opts)
 			if err != nil {
 				return fmt.Errorf("create gql client: %w", err)
 			}

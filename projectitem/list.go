@@ -6,12 +6,12 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/cli/go-gh/pkg/api"
+	"github.com/cli/go-gh/v2/pkg/api"
 )
 
 func List(
 	ctx context.Context,
-	gql api.GQLClient,
+	gql *api.GraphQLClient,
 	projectUrl string,
 	jqFilter string,
 	limit int,
