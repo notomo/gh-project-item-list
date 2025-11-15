@@ -1,11 +1,9 @@
 module github.com/notomo/gh-project-item-list
 
-go 1.23.0
-
-toolchain go1.24.1
+go 1.25.0
 
 require (
-	github.com/cli/go-gh/v2 v2.12.2
+	github.com/cli/go-gh/v2 v2.13.0
 	github.com/cli/shurcooL-graphql v0.0.4
 	github.com/henvic/httpretty v0.1.4
 	github.com/itchyny/gojq v0.12.17
