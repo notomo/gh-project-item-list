@@ -3,7 +3,7 @@ module github.com/notomo/gh-project-item-list
 go 1.25.0
 
 require (
-	github.com/cli/go-gh/v2 v2.16.0
+	github.com/cli/go-gh/v2 v2.16.1
 	github.com/cli/shurcooL-graphql v0.0.4
 	github.com/henvic/httpretty v0.2.0
 	github.com/itchyny/gojq v0.12.19
